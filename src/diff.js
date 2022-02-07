@@ -28,7 +28,7 @@ const genDiff = (firstFilePath, secondFilePath) => {
       const keyInSecond = secondFileData[key];
       
       if(keyInFirst === keyInSecond) {
-        result.push(`\n  ${key}:${keyInFirst}`)
+        result.push(`\n   ${key}:${keyInFirst}`)
       }
       if (keyInFirst !== keyInSecond) {
         if (keyInFirst === undefined && keyInSecond !== undefined) { 
@@ -44,7 +44,7 @@ const genDiff = (firstFilePath, secondFilePath) => {
     });
   }
   getObjectDiff(firstFileData, secondFileData);
-  return `{${String(result)}\n}`;
+  return `{${String(result.join(''))}\n}`;
 }
 
 export default genDiff;
