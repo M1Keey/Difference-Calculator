@@ -38,6 +38,7 @@ const genDiff = (firstFilePath, secondFilePath) => {
           result.push(`\n  +${key}:${keyInSecond}`);
         }
       }
+      return result;
     });
   };
   getObjectDiff(firstFileData, secondFileData);
