@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { dirname, path } from 'path';
+import path, { dirname } from 'path';
 import genDiff from '../src/diff.js';
 
 const __filename = fileURLToPath(import.meta.url);
