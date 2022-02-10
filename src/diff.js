@@ -26,16 +26,16 @@ const genDiff = (firstFilePath, secondFilePath) => {
       const keyInSecond = secondFileData[key];
 
       if (keyInFirst === keyInSecond) {
-        result.push(`\n   ${key}:${keyInFirst}`);
+        result.push(`\n    ${key}: ${keyInFirst}`);
       }
       if (keyInFirst !== keyInSecond) {
         if (keyInFirst === undefined && keyInSecond !== undefined) {
-          result.push(`\n  +${key}:${keyInSecond}`);
+          result.push(`\n  + ${key}: ${keyInSecond}`);
         } else if (keyInFirst !== undefined && keyInSecond === undefined) {
-          result.push(`\n  -${key}:${keyInFirst}`);
+          result.push(`\n  - ${key}: ${keyInFirst}`);
         } else {
-          result.push(`\n  -${key}:${keyInFirst}`);
-          result.push(`\n  +${key}:${keyInSecond}`);
+          result.push(`\n  - ${key}: ${keyInFirst}`);
+          result.push(`\n  + ${key}: ${keyInSecond}`);
         }
       }
       return result;
