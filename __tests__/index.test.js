@@ -11,6 +11,10 @@ const getFictureData = (fixtureName) => readFileSync(`${getFicturePath(fixtureNa
 
 const testsData = [
   ['file1.json', 'file2.json', 'expected_result1.txt'],
+  ['file1.yaml', 'file2.yaml', 'expected_result1.txt'],
+  ['file1.yml', 'file2.yml', 'expected_result1.txt'],
+  ['file1.yml', 'file2.json', 'expected_result1.txt'],
+  ['file1.json', 'file2.yaml', 'expected_result1.txt'],
 ];
 
 describe('check for correct diff', () => {

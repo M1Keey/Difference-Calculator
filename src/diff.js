@@ -1,12 +1,14 @@
 import { readFileSync } from 'fs';
 import path from 'path';
 import _ from 'lodash';
+import parseData from './parcers.js';
 
 const genDiff = (firstFilePath, secondFilePath) => {
   const takeDataFromJson = (file) => {
     const filePath = path.isAbsolute(file) ? file : path.resolve(process.cwd(), '__fixtures__', file);
     const fileData = readFileSync(`${filePath}`, 'utf-8');
-    const parcedData = JSON.parse(fileData);
+    const fileFormat = file.split('.').pop();
+    const parcedData = parseData(fileFormat, fileData);
     return parcedData;
   };
 
