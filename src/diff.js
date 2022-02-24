@@ -1,12 +1,13 @@
-import { readFileSync } from 'fs';
+import fs from 'fs';
 import path from 'path';
-import _ from 'lodash';
 import parseData from './parcers.js';
+import buildTree from './buildTree.js';
+import format from './formatters/format.js';
 
-const genDiff = (firstFilePath, secondFilePath) => {
+const genDiff = (firstFilePath, secondFilePath, formatType = 'stylish') => {
   const takeDataFromJson = (file) => {
     const filePath = path.isAbsolute(file) ? file : path.resolve(process.cwd(), '__fixtures__', file);
-    const fileData = readFileSync(`${filePath}`, 'utf-8');
+    const fileData = fs.readFileSync(`${filePath}`, 'utf-8');
     const fileFormat = file.split('.').pop();
     const parcedData = parseData(fileFormat, fileData);
     return parcedData;
@@ -14,37 +15,9 @@ const genDiff = (firstFilePath, secondFilePath) => {
 
   const firstFileData = takeDataFromJson(firstFilePath);
   const secondFileData = takeDataFromJson(secondFilePath);
-
-  const result = [];
-
-  const getObjectDiff = (obj1, obj2) => {
-    const firstFileKeys = Object.keys(obj1);
-    const secondFileKeys = Object.keys(obj2);
-
-    const bothFilesKeys = _.union(firstFileKeys, secondFileKeys).sort();
-
-    bothFilesKeys.map((key) => {
-      const keyInFirst = firstFileData[key];
-      const keyInSecond = secondFileData[key];
-
-      if (keyInFirst === keyInSecond) {
-        result.push(`\n    ${key}: ${keyInFirst}`);
-      }
-      if (keyInFirst !== keyInSecond) {
-        if (keyInFirst === undefined && keyInSecond !== undefined) {
-          result.push(`\n  + ${key}: ${keyInSecond}`);
-        } else if (keyInFirst !== undefined && keyInSecond === undefined) {
-          result.push(`\n  - ${key}: ${keyInFirst}`);
-        } else {
-          result.push(`\n  - ${key}: ${keyInFirst}`);
-          result.push(`\n  + ${key}: ${keyInSecond}`);
-        }
-      }
-      return result;
-    });
-  };
-  getObjectDiff(firstFileData, secondFileData);
-  return `{${String(result.join(''))}\n}`;
+  const innerTree = buildTree(firstFileData, secondFileData);
+  return format(innerTree, formatType);
 };
 
 export default genDiff;
+// console.log(genDiff('file1.json', 'file2.json'))

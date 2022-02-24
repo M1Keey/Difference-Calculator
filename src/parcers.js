@@ -9,7 +9,7 @@ const parseData = (format, data) => {
     case 'yml':
       return yaml.load(data);
     default:
-      throw new Error('Формат не поддерживается!');
+      throw new Error('Расширение не поддерживается!');
   }
 };
 

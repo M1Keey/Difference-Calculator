@@ -19,8 +19,8 @@ const testsData = [
 
 describe('check for correct diff', () => {
   test.each(testsData)('Common test', (fixture1, fixture2, correctResult) => {
-    const correcDiffResult = getFictureData(correctResult);
+    const correctDiffResult = getFictureData(correctResult);
     const actualDiffResult = genDiff(fixture1, fixture2);
-    expect(actualDiffResult).toEqual(correcDiffResult);
+    expect(actualDiffResult).toEqual(correctDiffResult);
   });
 });
