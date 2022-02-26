@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import parseData from './parcers.js';
 import buildTree from './buildTree.js';
-import format from './formatters/format.js';
+import format from './formatters/index.js';
 
 const genDiff = (firstFilePath, secondFilePath, formatType = 'stylish') => {
   const takeDataFromJson = (file) => {
@@ -20,4 +20,3 @@ const genDiff = (firstFilePath, secondFilePath, formatType = 'stylish') => {
 };
 
 export default genDiff;
-// console.log(genDiff('file1.json', 'file2.json'))

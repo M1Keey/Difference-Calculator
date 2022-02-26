@@ -27,7 +27,7 @@ const stylish = (innerTree) => {
       case 'recursion':
         return `${indent(depth)}  ${node.key}: {\n${iter(node.children, depth + 1).join('')}${indent(depth)}  }\n`;
       default:
-        throw new Error('Ошибка!');
+        throw new Error(`There is no such action: ${node.action}`);
     }
   });
   return `{\n${iter(innerTree, 1).join('')}}`;
