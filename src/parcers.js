@@ -1,7 +1,7 @@
 import yaml from 'js-yaml';
 
-const parseData = (format, data) => {
-  switch (format) {
+const parseData = (extension, data) => {
+  switch (extension) {
     case 'json':
       return JSON.parse(data);
     case 'yaml':
@@ -9,7 +9,7 @@ const parseData = (format, data) => {
     case 'yml':
       return yaml.load(data);
     default:
-      throw new Error('Расширение не поддерживается!');
+      throw new Error(`The extension ${extension} is not supported!`);
   }
 };
 

@@ -7,8 +7,10 @@ const format = (tree, formatType) => {
       return stylish(tree);
     case 'plain':
       return plain(tree);
+    case 'json':
+      return JSON.stringify(tree);
     default:
-      throw new Error('Формат не поддерживается!');
+      throw new Error(`The format ${formatType} is not supported!`);
   }
 };
 export default format;

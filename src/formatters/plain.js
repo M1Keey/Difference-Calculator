@@ -1,12 +1,12 @@
 const stringify = (data) => {
-  if (typeof data === 'object') {
-    return '[complex value]';
-  }
   if (typeof data === 'string') {
     return `'${data}'`;
   }
   if (data === null) {
     return null;
+  }
+  if (typeof data === 'object') {
+    return '[complex value]';
   }
   return String(data);
 };
