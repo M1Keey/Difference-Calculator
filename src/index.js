@@ -8,7 +8,8 @@ const genDiff = (firstFilePath, secondFilePath, formatType = 'stylish') => {
   const takeDataFromJson = (file) => {
     const filePath = path.isAbsolute(file) ? file : path.resolve(process.cwd(), '__fixtures__', file);
     const fileData = fs.readFileSync(`${filePath}`, 'utf-8');
-    const fileFormat = file.split('.').pop();
+    const fileFormat = path.extname(file).slice(1);
+    console.log(fileFormat)
     const parcedData = parseData(fileFormat, fileData);
     return parcedData;
   };
