@@ -6,7 +6,7 @@ import format from './formatters/index.js';
 
 const genDiff = (firstFilePath, secondFilePath, formatType = 'stylish') => {
   const takeDataFromJson = (file) => {
-    const filePath = path.isAbsolute(file) ? file : path.resolve(process.cwd(), '__fixtures__', file);
+    const filePath = path.isAbsolute(file) ? file : path.resolve(process.cwd(), file);
     const fileData = fs.readFileSync(`${filePath}`, 'utf-8');
     const fileFormat = path.extname(file).slice(1);
     const parcedData = parseData(fileFormat, fileData);

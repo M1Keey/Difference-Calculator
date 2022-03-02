@@ -26,7 +26,9 @@ const testsData = [
 describe('check for correct diff', () => {
   test.each(testsData)('Common test', (fixture1, fixture2, correctResult, format) => {
     const correctDiffResult = getFictureData(correctResult);
-    const actualDiffResult = genDiff(fixture1, fixture2, format);
+    const firstFicturePath = getFicturePath(fixture1);
+    const secondFicturePath = getFicturePath(fixture2);
+    const actualDiffResult = genDiff(firstFicturePath, secondFicturePath, format);
     expect(actualDiffResult).toEqual(correctDiffResult);
   });
   test('plain test error', () => {
@@ -43,12 +45,12 @@ describe('check for correct diff', () => {
   });
   test('formatter non-existent format test error', () => {
     expect(() => {
-      genDiff('file1.json', 'file2.json', 'badFormat');
+      genDiff(getFicturePath('file1.json'), getFicturePath('file2.json'), 'badFormat');
     }).toThrow('The format badFormat is not supported!');
   });
   test('parcer non-existent format test error', () => {
     expect(() => {
-      genDiff('file1.json', 'badExtension.txt');
-    }).toThrow('The extension txt is not supported!');
+      genDiff(getFicturePath('file1.json'), getFicturePath('badExtension.txt'));
+    }).toThrow('The format txt is not supported!');
   });
 });
